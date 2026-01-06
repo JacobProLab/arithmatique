@@ -1,9 +1,4 @@
-
-
-
-
-
-
+print('hello world!')
 
 
 

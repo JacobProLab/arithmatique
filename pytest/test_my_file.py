@@ -1,17 +1,21 @@
-from my_file import will_boil, verify_functions
+from my_file import PasswordVerifier
+from re import search, IGNORECASE
 
-def fake_will_boil(temp):
-    return {"passed": False, "reason": f"{temp}°C lower or equal to 100°C"}
+def fake_rule(temp):
+    return {"passed": False, "reason": "fake reason"}
+
 
 def test_verify_functions():
-    
-    # Arrange
-    fake_temp = 90
-    fake_rules = [fake_will_boil]
-    
-    # Act
-    errors = verify_functions(fake_temp, fake_rules)
 
-    # Assert
-    assert errors[0] == f"{fake_temp}°C lower or equal to 100°C"
+    verifier = PasswordVerifier()
+    fake_input = 'any value'
+    verifier.add_rule(fake_rule)
 
+    errors = verifier.verify(fake_input)
+
+    for error in errors:
+        assert search(r'fake reason', error, IGNORECASE)
+
+
+def test_divide():
+    pass

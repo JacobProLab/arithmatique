@@ -1,25 +1,26 @@
 from collections.abc import Callable
 
 
-def will_boil(temp):
+class PasswordVerifier:
 
-    if temp > 100:
-        return {"passed": True, "reason": f"{temp}°C greater than 100°C"}
-    else:
-        return {"passed": False, "reason": f"{temp}°C lower or equal to 100°C"}
+    def __init__(self):
+        self.rules: list[Callable] = []
+
+    def add_rule(self, rule):
+        self.rules.append(rule)
+
+    def verify(self, input):
+
+        errors: list[str] = []
+
+        for rule in self.rules:
+            result = rule(input)
+            if not result.get('passed'):
+                errors.append(result.get('reason'))
+        
+        return errors
+
     
 
-def verify_functions(input, rules: list[Callable[..., dict[str, bool|str]]]) -> list[str]:
-
-    errors = []
-
-    for rule in rules:
-        result = rule(input)
-        if not result["passed"]:
-            errors.append(result["reason"])
-
-    return errors
-
 if __name__ == "__main__":
-    rules = [will_boil]
-    print(verify_functions(18, rules))
+    pass

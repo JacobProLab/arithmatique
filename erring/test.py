@@ -4,8 +4,8 @@ from scipy.stats import norm
 from itertools import product
 from temp import Arithmatique as arith
 
-low_bound = -10
-hi_bound = 21
+low_bound = -4
+hi_bound = 4
 
 
 def is_trivial(pair: tuple[int, int]) -> bool:
@@ -40,23 +40,24 @@ for _ in range(10):
     print(get_expr())
 
 
+x = [n for n in range(low_bound)]
 
-# all_pairs = np.array([pair for pair in product(x, y) if not is_trivial(pair)])
+all_pairs = np.array([pair for pair in product(x, y) if not is_trivial(pair)])
 
-# # Create subsets for each operation type
-# add_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x + y <= hi_bound])
-# sub_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x - y <= hi_bound])
-# mul_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x * y <= hi_bound])
-# div_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x/y <= hi_bound and is_integer(x/y)])
+# Create subsets for each operation type
+add_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x + y <= hi_bound])
+sub_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x - y <= hi_bound])
+mul_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x * y <= hi_bound])
+div_data = np.array([(x, y) for x, y in all_pairs if low_bound <= x/y <= hi_bound and is_integer(x/y)])
 
-# # Apply distribution for random choice
-# data = np.array([data[np.random.choice(data_range, p=p)] for _ in range(10)])
+# Apply distribution for random choice
+data = np.array([data[np.random.choice(data_range, p=p)] for _ in range(10)])
 
-# # Retrieve results
-# print(data)
-# result = data[:, 0] * data[:, 1]
-# print(result)
-# print(np.mean(result))
+# Retrieve results
+print(data)
+result = data[:, 0] * data[:, 1]
+print(result)
+print(np.mean(result))
 
 
 # Je veux pouvoir controler le range des resultats, mais comment
